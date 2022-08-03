@@ -14,25 +14,22 @@ public class Person {
         this.age = 35;
     }
 
-    public Person(String name, String surname, int age) {
+    private Person(String name, String surname, int age) {
         this.id = ++counter;
-        if (!name.isBlank()) {
-            this.name = name;
-        }
-        else {
-            throw new RuntimeException("Incorrect name of Person");
-        }
-        if (!surname.isBlank()) {
-            this.surname = surname;
-        }
-        else {
-            throw new RuntimeException("Incorrect surname of Person");
-        }
-        if (age > 0 && age < 120) {
-            this.age = age;
-        }
-        else {
-            throw new RuntimeException("Incorrect age of Person");
+        this.name = name;
+        this.surname = surname;
+        this.age = age;
+    }
+
+    static Person build(String name, String surname, int age) {
+        if (!name.isBlank() && !surname.isBlank() && age > 0 && age < 120) {
+            return new Person(name, surname, age);
+        } else if (name.isBlank()) {
+            throw new IllegalArgumentException("Incorrect or empty name!");
+        } else if (surname.isBlank()) {
+            throw new IllegalArgumentException("Incorrect or empty surname!");
+        } else {
+            throw new IllegalArgumentException("Incorrect age!");
         }
     }
 

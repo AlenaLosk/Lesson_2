@@ -7,12 +7,12 @@ public class Runner3 {
         Person p1 = new Person();
         Person p2;
         try {
-            p2 = new Person("Ольга", "", 50);
-        } catch (RuntimeException ex) {
+            p2 = Person.build("Ольга", "", 50);
+        } catch (IllegalArgumentException ex) {
             System.out.println(ex.getMessage());
-            p2 = new Person("Ольга", "Громова", 50);
+            p2 = Person.build("Ольга", "Громова", 50);
         }
-        Person p3 = new Person("Ivan", "Petrov", 35);
+        Person p3 = Person.build("Ivan", "Petrov", 35);
 
         System.out.println("Are p1 and p3 the same person? Answer: " + p1.equals(p3));
         System.out.println("Are p1 and p2 the same person? Answer: " + p1.equals(p2));
